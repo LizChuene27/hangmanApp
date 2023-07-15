@@ -1,6 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Alert, Button, Container, Row, Col, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import hangmanState1 from '../src/state1.GIF';
+import hangmanState2 from '../src/state2.GIF';
+import hangmanState3 from '../src/state3.GIF';
+import hangmanState4 from '../src/state4.GIF';
+import hangmanState5 from '../src/state5.GIF';
+import hangmanState6 from '../src/state6.GIF';
+import hangmanState7 from '../src/state7.GIF';
+import hangmanState8 from '../src/state8.GIF';
+import hangmanState9 from '../src/state9.GIF';
+import hangmanState10 from '../src/state10.gif';
+import hangmanState11 from '../src/state11.GIF';
 
 const Hangman = () => {
   const [word, setWord] = useState('');
@@ -10,6 +21,7 @@ const Hangman = () => {
   const [won, setWon] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
+  const [hangmanStep, setHangmanStep] = useState(0); // Added state for hangman step
 
   const words = ['apple', 'banana', 'cherry', 'dragon', 'elephant', 'flamingo']; // Array of words for the game
 
@@ -34,6 +46,7 @@ const Hangman = () => {
 
       if (!word.includes(letter)) {
         setRemainingGuesses(remainingGuesses - 1);
+        setHangmanStep(hangmanStep + 1); // Increment hangman step on incorrect guess
       }
 
       checkGameOver();
@@ -95,6 +108,7 @@ const Hangman = () => {
     setGameOver(false);
     setWon(false);
     setGameStarted(false);
+    setHangmanStep(0); // Reset hangman step
 
     const randomWord = words[Math.floor(Math.random() * words.length)];
     setWord(randomWord.toLowerCase());
@@ -107,6 +121,22 @@ const Hangman = () => {
     </Tooltip>
   );
 
+  const hangmanImages = [
+    hangmanState1,
+    hangmanState2,
+    hangmanState3,
+    hangmanState4,
+    hangmanState5,
+    hangmanState6,
+    hangmanState7,
+    hangmanState8,
+    hangmanState9,
+    hangmanState10,
+    hangmanState11,
+  ];
+
+  const hangmanImage = hangmanImages[hangmanStep];
+
   return (
     <Container className="text-center">
       <Row>
@@ -115,6 +145,9 @@ const Hangman = () => {
           {!gameOver && <p>Remaining Guesses: {remainingGuesses}</p>}
           <div className="word">{renderWord()}</div>
           <div className="alphabet">{renderAlphabet()}</div>
+          <div className="hangman-image">
+            <img src={hangmanImage} alt="Hangman" />
+          </div>
           {gameStarted && gameOver && (
             <Alert variant={won ? 'success' : 'danger'}>
               {won ? 'Congratulations! You won!' : 'Game Over. You lost!'}
