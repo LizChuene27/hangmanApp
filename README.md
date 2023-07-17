@@ -30,7 +30,7 @@ Hangman is a classic word-guessing game implemented in React.js. The player need
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/your-username/hangman.git`
+1. Clone the repository: `git clone https://github.com/LizChuene27/hangman.git`
 2. Navigate to the project directory: `cd hangman`
 3. Install dependencies: `npm install`
 4. Start the development server: `npm start`
